@@ -1,0 +1,298 @@
+Name: Types
+Type: FolderType
+Children:
+- Name: PMNotification_eventObject
+  Id: g=81de1ccd2c029ca52c29de45871ca876
+  Supertype: BaseObjectType
+  Children:
+  - Name: Event_Type
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "0"
+  - Name: Sub_Event_Code
+    Type: BaseDataVariableType
+    DataType: Int32
+  - Name: Local_Timestamp
+    Type: BaseDataVariableType
+    DataType: DateTime
+  - Name: UTC_Timestamp
+    Type: BaseDataVariableType
+    DataType: DateTime
+  - Name: Association_Timestamp
+    Type: BaseDataVariableType
+    DataType: DateTime
+  - Name: Event_Duration_mS
+    Type: BaseDataVariableType
+    DataType: Float
+  - Name: Min_or_Max
+    Type: BaseDataVariableType
+    DataType: Float
+  - Name: Trip_Point
+    Type: BaseDataVariableType
+    DataType: Float
+  - Name: WSB_Originator
+    Type: BaseDataVariableType
+    DataType: Int32
+  - Name: NotificationProcessed
+    Type: BaseDataVariableType
+    DataType: Boolean
+  - Name: index
+    Type: BaseDataVariableType
+    DataType: Int32
+  - Name: WaveformID
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "0"
+- Name: PMNotification_Definition
+  Id: g=472a6a7eb3b33a45a569733c52854906
+  Supertype: BaseObjectType
+  Children:
+  - Name: Selected
+    Type: BaseDataVariableType
+    DataType: Boolean
+- Name: PMNotification_eventsDefinitions
+  Id: g=65bfe1abae42075585b0260646b98abe
+  Supertype: BaseObjectType
+  Children:
+  - Name: Voltage_Swell
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: Voltage_Sag
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: Imbalance
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: Power_Frequency
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: Voltage_DC_Offset
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: Voltage_THD
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: Current_THD
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: IEEE1159_Over_Voltage
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: IEEE1159_Under_Voltage
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: Voltage_TID
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: Current_TID
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: IEEE1159_Voltage_Fluctuations
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: Voltage_Transient
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: WSB_Sag
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: WSB_Swell
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: WSB_Transient
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: WSB_Command
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: IEEE1159_Swell
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: IEEE1159_Sag
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: IEEE1159_Interruption
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: EN61000_4_30_Mains_Signaling
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: EN61000_4_30_Under_Deviation
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: EN61000_4_30_Over_Deviation
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+  - Name: Command_Trigger
+    Type: PMNotification_Definition
+    Children:
+    - Name: Selected
+      Type: BaseDataVariableType
+      DataType: Boolean
+- Name: PMNotification_PowerQualityEvents
+  Id: g=775b938dc363dc3811ae1708d7e0a623
+  Supertype: BaseObjectType
+- Class: DataType
+  Name: PMNotification_SelectedOption
+  Id: g=86c68c2c9afabc6da7a8c253e794ad02
+  Supertype: Enumeration
+  EnumDefinition: 
+   {
+    "Name": "PMNotification_UserSelectedOptionsDataType",
+    "DataType": {
+     "IdType": 2,
+     "Id": "86c68c2c9afabc6da7a8c253e794ad02",
+     "Namespace": 18
+    },
+    "Fields": [{
+      "Name": "Value0",
+      "Value": 0,
+      "DisplayName": {
+       "LocaleId": "en-US",
+       "Text": "show Devices"
+      }
+     },{
+      "Name": "Value1",
+      "Value": 1,
+      "DisplayName": {
+       "LocaleId": "en-US",
+       "Text": "show Event Types"
+      }
+     }]
+   }
+  Children:
+  - Name: ns=0;EnumValues
+    Type: BaseDataVariableType
+    DataType: EnumValueType
+    ModellingRule: None
+    ValueRank: OneDimension
+    ArrayDimensions: [0]
+    Value: [{"TypeId":{"Id":7594},"Body":{"Value":0,"DisplayName":{"LocaleId":"en-US","Text":"show Devices"},"Description":{"NamespaceIndex":-1,"LocaleId":"","Text":""}}},{"TypeId":{"Id":7594},"Body":{"Value":1,"DisplayName":{"LocaleId":"en-US","Text":"show Event Types"},"Description":{"NamespaceIndex":-1,"LocaleId":"","Text":""}}}]
+- Name: PMNotification_SuperTypeObject
+  Id: g=c0dcdb0328681b540db8a1c2074d65a8
+  Supertype: BaseObjectType
+  Children:
+  - Name: nameToDisplay
+    Type: BaseDataVariableType
+    DataType: String
+- Name: PMNotification_DeviceStatus
+  Id: g=3ebdf04e6993619894bc52c808bca1bb
+  Supertype: BaseObjectType
+  Children:
+  - Name: connectionStatus
+    Type: BaseDataVariableType
+    DataType: CommunicationStatus
+  - Name: lastError
+    Type: BaseDataVariableType
+    DataType: String
+  - Name: succesfullConnTime
+    Type: BaseDataVariableType
+    DataType: DateTime
+  - Name: responeTimeMS
+    Type: BaseDataVariableType
+    DataType: Int32
+- Class: DataType
+  Name: PMNotification_ObjectOptions
+  Id: g=928d2e37179593ecd49dbe5da23cc5ac
+  Supertype: Enumeration
+  EnumDefinition: 
+   {
+    "Name": "PMNotification_ObjectOptions",
+    "DataType": {
+     "IdType": 2,
+     "Id": "928d2e37179593ecd49dbe5da23cc5ac",
+     "Namespace": 18
+    },
+    "Fields": [{
+      "Name": "Value0",
+      "Value": 0,
+      "DisplayName": {
+       "LocaleId": "en-US",
+       "Text": "show Objects"
+      }
+     },{
+      "Name": "Value1",
+      "Value": 1,
+      "DisplayName": {
+       "LocaleId": "en-US",
+       "Text": "show EventObjects"
+      }
+     }]
+   }
+  Children:
+  - Name: ns=0;EnumValues
+    Type: BaseDataVariableType
+    DataType: EnumValueType
+    ModellingRule: None
+    ValueRank: OneDimension
+    ArrayDimensions: [0]
+    Value: [{"TypeId":{"Id":7594},"Body":{"Value":0,"DisplayName":{"LocaleId":"en-US","Text":"show Objects"},"Description":{"NamespaceIndex":-1,"LocaleId":"","Text":""}}},{"TypeId":{"Id":7594},"Body":{"Value":1,"DisplayName":{"LocaleId":"en-US","Text":"show EventObjects"},"Description":{"NamespaceIndex":-1,"LocaleId":"","Text":""}}}]

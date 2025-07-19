@@ -1,0 +1,254 @@
+Name: Types
+Type: FolderType
+Children:
+- Name: PMNotification_User
+  Id: g=00a0e8fcc18273d2213e8c8835181139
+  Supertype: PMNotification_SuperTypeObject
+  Children:
+  - Name: nameToDisplay
+    Type: BaseDataVariableType
+    DataType: String
+  - Name: eventsDefinitions
+    Type: PMNotification_eventsDefinitions
+    Children:
+    - Name: Voltage_Swell
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: Voltage_Sag
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: Imbalance
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: Power_Frequency
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: Voltage_DC_Offset
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: Voltage_THD
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: Current_THD
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: IEEE1159_Over_Voltage
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: IEEE1159_Under_Voltage
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: Voltage_TID
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: Current_TID
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: IEEE1159_Voltage_Fluctuations
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: Voltage_Transient
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: WSB_Sag
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: WSB_Swell
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: WSB_Transient
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: WSB_Command
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: IEEE1159_Swell
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: IEEE1159_Sag
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: IEEE1159_Interruption
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: EN61000_4_30_Mains_Signaling
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: EN61000_4_30_Under_Deviation
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: EN61000_4_30_Over_Deviation
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+    - Name: Command_Trigger
+      Type: PMNotification_Definition
+      Children:
+      - Name: Selected
+        Type: BaseDataVariableType
+        DataType: Boolean
+  - Name: Name
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "0"
+  - Name: LastName
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "0"
+  - Name: email
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "0"
+  - Name: deviceDefinitions
+    Type: BaseObjectType
+  - Name: isActive
+    Type: BaseDataVariableType
+    DataType: Boolean
+  - Name: UserStatus
+    Type: PMNotification_DeviceStatus
+    Children:
+    - Name: connectionStatus
+      Type: BaseDataVariableType
+      DataType: CommunicationStatus
+    - Name: lastError
+      Type: BaseDataVariableType
+      DataType: String
+    - Name: succesfullConnTime
+      Type: BaseDataVariableType
+      DataType: DateTime
+    - Name: responeTimeMS
+      Type: BaseDataVariableType
+      DataType: Int32
+- Name: PMNotification_PowerMonitor
+  Id: g=4d49633b1312476d9f6f0a5418ae6e66
+  Supertype: PMNotification_SuperTypeObject
+  Children:
+  - Name: nameToDisplay
+    Type: BaseDataVariableType
+    DataType: String
+  - Name: httpEnable
+    Type: BaseDataVariableType
+    DataType: Boolean
+    Children:
+    - Name: ipAddress
+      Type: BaseDataVariableType
+      DataType: String
+      Value: "0.0.0.0"
+    - Name: port
+      Type: BaseDataVariableType
+      DataType: Int32
+      Value: 80
+    - Name: connectionTimeout
+      Type: BaseDataVariableType
+      DataType: Int32
+      Value: 5000
+  - Name: DeviceStatus
+    Type: PMNotification_DeviceStatus
+    Children:
+    - Name: connectionStatus
+      Type: BaseDataVariableType
+      DataType: CommunicationStatus
+    - Name: lastError
+      Type: BaseDataVariableType
+      DataType: String
+    - Name: succesfullConnTime
+      Type: BaseDataVariableType
+      DataType: DateTime
+    - Name: responeTimeMS
+      Type: BaseDataVariableType
+      DataType: Int32
+  - Name: emailEnable
+    Type: BaseDataVariableType
+    DataType: Boolean
+  - Name: AdditionalInformationLine1
+    Type: BaseDataVariableType
+    DataType: String
+  - Name: AdditionalInformationLine2
+    Type: BaseDataVariableType
+    DataType: String
+  - Name: AdditionalInformationLine3
+    Type: BaseDataVariableType
+    DataType: String
+  - Name: NominalVoltage
+    Type: BaseDataVariableType
+    DataType: Float
+  - Name: PowerQualityEvents
+    Type: PMNotification_PowerQualityEvents
+  - Name: WaveformFiles
+    Type: BaseObjectType
+  - Name: Username
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "admin"
+  - Name: Password
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "admin"

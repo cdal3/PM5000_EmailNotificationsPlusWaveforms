@@ -1,0 +1,95 @@
+Name: Devices
+Id: g=156f7f210668e18b65dee9c5718c24a8
+Type: FolderType
+Children:
+- Name: PMNotification_PowerMonitor1
+  Id: g=45fb897af093812dc97d9a1dce273f5f
+  Type: PMNotification_PowerMonitor
+  Children:
+  - Name: nameToDisplay
+    Id: g=4347d3603953deaebc00f1df890f4ea9
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "HL_PM5K"
+  - Name: httpEnable
+    Id: g=89cbb19575834699c21b39021acaad76
+    Type: BaseDataVariableType
+    DataType: Boolean
+    Value: true
+    Children:
+    - Name: ipAddress
+      Id: g=5f2c704b24020738ea303c25252b9a78
+      Type: BaseDataVariableType
+      DataType: String
+      Value: "192.168.0.9"
+    - Name: port
+      Id: g=05e9137c4d128700b31b5aef282ec0a1
+      Type: BaseDataVariableType
+      DataType: Int32
+      Value: 80
+    - Name: connectionTimeout
+      Id: g=3578780500d62f260e6cce98512e23a4
+      Type: BaseDataVariableType
+      DataType: Int32
+      Value: 5000
+  - Name: DeviceStatus
+    Id: g=04dbbdfdb6179132ef4baef6091f95db
+    Type: PMNotification_DeviceStatus
+    Children:
+    - Name: connectionStatus
+      Id: g=55938eed4f3bfaacbf0258cbbe962316
+      Type: BaseDataVariableType
+      DataType: CommunicationStatus
+    - Name: lastError
+      Id: g=7ac99e58327f420944458293602dd3d6
+      Type: BaseDataVariableType
+      DataType: String
+    - Name: succesfullConnTime
+      Id: g=8894d6f65187671a38cd1a4da3baeaed
+      Type: BaseDataVariableType
+      DataType: DateTime
+    - Name: responeTimeMS
+      Id: g=fe09304b1a99e39fa97cc0642eb57003
+      Type: BaseDataVariableType
+      DataType: Int32
+  - Name: emailEnable
+    Id: g=d2777236280395bf2be0c7f71480d2a0
+    Type: BaseDataVariableType
+    DataType: Boolean
+    Value: true
+  - Name: AdditionalInformationLine1
+    Id: g=3b3c0dbac98c99eb163f2d0d19456794
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "PowerMonitor 5000"
+  - Name: AdditionalInformationLine2
+    Id: g=8c74da608f4b3d9bbc6e8aaffe74bb67
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "Home Lab"
+  - Name: AdditionalInformationLine3
+    Id: g=098f3bb0e15d059e36e0be04efcc41cf
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "Kentucky"
+  - Name: NominalVoltage
+    Id: g=48dd7517a019adcd325c2f97005b5cab
+    Type: BaseDataVariableType
+    DataType: Float
+    Value: 480.0
+  - Name: PowerQualityEvents
+    Id: g=16e4db5c0ec615d51655860e100cda19
+    Type: PMNotification_PowerQualityEvents
+  - Name: WaveformFiles
+    Id: g=18dd603def719e378c6e204f979bf722
+    Type: BaseObjectType
+  - Name: Username
+    Id: g=7bc16feddade19b3a6034cf63b02279d
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "admin"
+  - Name: Password
+    Id: g=fa3747b181f0657ea02780f7d89c1e60
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "admin"

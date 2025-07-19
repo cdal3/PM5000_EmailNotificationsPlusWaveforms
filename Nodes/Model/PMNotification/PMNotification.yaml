@@ -1,0 +1,62 @@
+Name: PMNotification
+Type: FolderType
+Children:
+- File: Devices/Devices.yaml
+- File: Users/Users.yaml
+- Name: generalSettings
+  Id: g=77cd4f9e8109f0b3c450a08ffd3a2572
+  Type: BaseObjectType
+  Children:
+  - Name: SenderEmailAddresss
+    Id: g=a250484e361666f3245c62f993ba5dad
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "ptu.ra.eh@gmail.com"
+  - Name: SenderEmailPassword
+    Id: g=9ba10a48f5d2743e8ecc3e6cbff33a31
+    Type: BaseDataVariableType
+    DataType: Password
+    Value: "qgmnqsbjybrdedbk"
+  - Name: SMTPHostname
+    Id: g=07882508d9e3c6baee84eb65389d8d73
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "smtp.gmail.com"
+  - Name: SMPTPort
+    Id: g=5d7ba5484328a0a8138c382b85af6df3
+    Type: BaseDataVariableType
+    DataType: Int32
+    Value: 587
+  - Name: EnableSSL
+    Id: g=cf200a1ed22f056134e14a6a9e4142d3
+    Type: BaseDataVariableType
+    DataType: Boolean
+    Value: true
+  - Name: status
+    Id: g=fd55f411059fb47cd5da19aedee6864b
+    Type: BaseDataVariableType
+    DataType: Int32
+  - Name: LogReadFrequency
+    Id: g=eb6e4543f5b264bb5320e17f6531f70a
+    Type: BaseDataVariableType
+    DataType: Int32
+    Value: 60
+- File: Types/Types.yaml
+- File: UIObjects/UIObjects.yaml
+- File: Engine/Engine.yaml
+- Name: ns=9;LibraryReference
+  Type: ObjectLibraryReference
+  DataType: ObjectLibraryReferenceDataType
+  Value: 
+   {
+    "TypeId": {
+     "Id": 72,
+     "Namespace": 9
+    },
+    "Body": {
+     "libraryGuid": "f261cba1eac4c8673f82149152790513",
+     "objectGuid": "40ea58615f3dfec8d036812d109e6247",
+     "objectVersion": 1,
+     "highestIgnoredVersion": 0
+    }
+   }
