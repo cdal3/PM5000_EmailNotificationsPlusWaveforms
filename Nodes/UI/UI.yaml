@@ -1167,12 +1167,12 @@ Children:
         Type: BaseVariableType
         DataType: HorizontalAlignment
         ModellingRule: Optional
-        Value: 2
+        Value: 3
       - Name: VerticalAlignment
         Type: BaseVariableType
         DataType: VerticalAlignment
         ModellingRule: Optional
-        Value: 2
+        Value: 3
       - Name: optixLogo1
         Type: Image
         WriteMask: BrowseName|DataType|Description|DisplayName|MinimumSamplingInterval|UserAccessLevel
@@ -1218,6 +1218,26 @@ Children:
              "highestIgnoredVersion": 0
             }
            }
+      - Name: LeftMargin
+        Type: BaseVariableType
+        DataType: Size
+        ModellingRule: Optional
+        Value: 8.0
+      - Name: TopMargin
+        Type: BaseVariableType
+        DataType: Size
+        ModellingRule: Optional
+        Value: 8.0
+      - Name: RightMargin
+        Type: BaseVariableType
+        DataType: Size
+        ModellingRule: Optional
+        Value: 8.0
+      - Name: BottomMargin
+        Type: BaseVariableType
+        DataType: Size
+        ModellingRule: Optional
+        Value: 8.0
 - Name: WebPresentationEngine
   Type: ns=11;PresentationEngine
   Children:
