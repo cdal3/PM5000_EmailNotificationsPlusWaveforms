@@ -19,6 +19,7 @@ public class PMNotification_Engine_Logic : BaseNetLogic
     IUANode devicesFolder;
     IUANode usersFolder;
     private PeriodicTask mainPeriodicTask;
+    private bool isDownloadingFtp = false; // Flag to prevent periodic task overlap
 
     public override void Start()
     {
@@ -45,6 +46,12 @@ public class PMNotification_Engine_Logic : BaseNetLogic
 
     private async void getEventsFromPM()
     {
+        // Skip this cycle if FTP download is already in progress
+        if (isDownloadingFtp)
+        {
+            Log.Info("PMNotification", "Skipping periodic task cycle - FTP download in progress");
+            return;
+        }
 
         foreach(var device in devicesFolder.GetNodesByType<PMNotification_PowerMonitor>().ToList())
         {
@@ -398,6 +405,10 @@ public class PMNotification_Engine_Logic : BaseNetLogic
         {
             try
             {
+                // Set flag to block periodic task during FTP download
+                isDownloadingFtp = true;
+                Log.Info("PMNotification", $"Starting FTP download for waveform {waveformID}");
+
                 string ftpIp = device.GetVariable("httpEnable/ipAddress").Value.Value.ToString();
                 string ftpDirectory = "/Waveform/";
                 string ftpUrl = $"ftp://{ftpIp}{ftpDirectory}";
@@ -408,6 +419,9 @@ public class PMNotification_Engine_Logic : BaseNetLogic
                 System.Net.FtpWebRequest listRequest = (System.Net.FtpWebRequest)System.Net.WebRequest.Create(ftpUrl);
 #pragma warning restore SYSLIB0014 // Type or member is obsolete
                 listRequest.Method = System.Net.WebRequestMethods.Ftp.ListDirectory;
+                listRequest.Timeout = 10000; // 10 second timeout
+                var username = (string)device.GetVariable("Username").Value;
+                var password = (string)device.GetVariable("Password").Value;
                 listRequest.Credentials = new System.Net.NetworkCredential("admin", "admin");
                 using (var listResponse = (System.Net.FtpWebResponse)listRequest.GetResponse())
                 using (var listStream = listResponse.GetResponseStream())
@@ -432,6 +446,7 @@ public class PMNotification_Engine_Logic : BaseNetLogic
                     System.Net.FtpWebRequest downloadRequest = (System.Net.FtpWebRequest)System.Net.WebRequest.Create(fileUrl);
 #pragma warning restore SYSLIB0014 // Type or member is obsolete
                     downloadRequest.Method = System.Net.WebRequestMethods.Ftp.DownloadFile;
+                    downloadRequest.Timeout = 30000; // 30 second timeout for file download
                     downloadRequest.Credentials = new System.Net.NetworkCredential("admin", "admin");
                     using (var downloadResponse = (System.Net.FtpWebResponse)downloadRequest.GetResponse())
                     using (var fileStream = downloadResponse.GetResponseStream())
@@ -440,7 +455,7 @@ public class PMNotification_Engine_Logic : BaseNetLogic
                         fileStream.CopyTo(ms);
                         waveformFileBytes = ms.ToArray();
                         // Store the file in a cross-platform temp directory
-                        var tempPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "waveform.wfm");
+                        var tempPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"{waveformFileName}");
                         System.IO.File.WriteAllBytes(tempPath, waveformFileBytes);
                         attachmentURI.Value = tempPath;
                     }
@@ -450,6 +465,12 @@ public class PMNotification_Engine_Logic : BaseNetLogic
             {
                 Log.Info("PMNotification", "FTP waveform file error: " + ex.Message);
                 // Continue without attachment
+            }
+            finally
+            {
+                // Always clear the flag when FTP operation completes
+                isDownloadingFtp = false;
+                Log.Info("PMNotification", "FTP download completed");
             }
         }
         else {
