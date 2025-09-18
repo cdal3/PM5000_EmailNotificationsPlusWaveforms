@@ -40,7 +40,7 @@ Children:
     Id: g=eb6e4543f5b264bb5320e17f6531f70a
     Type: BaseDataVariableType
     DataType: Int32
-    Value: 60
+    Value: 5
 - File: Types/Types.yaml
 - File: UIObjects/UIObjects.yaml
 - File: Engine/Engine.yaml

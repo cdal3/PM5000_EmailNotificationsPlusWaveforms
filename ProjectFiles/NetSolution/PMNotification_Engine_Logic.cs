@@ -30,12 +30,13 @@ public class PMNotification_Engine_Logic : BaseNetLogic
         emailServiceTest.Value = 0;
 
         int logReadFrequency = InformationModel.Get(LogicObject.GetVariable("generalSettings").Value).GetVariable("LogReadFrequency").Value;
-        if(logReadFrequency < 3 || logReadFrequency > 21600)   
+        if (logReadFrequency < 3 || logReadFrequency > 21600)
             Log.Info("PMNotification", $"LogReadFrequency value: {logReadFrequency} is out of range (3s�6h). Clamping applied.");
-     
+
         logReadFrequency = 1000 * Math.Max(3, Math.Min(21600, logReadFrequency));
         mainPeriodicTask = new PeriodicTask(getEventsFromPM, logReadFrequency, LogicObject);
         mainPeriodicTask.Start();
+
     }
 
     public override void Stop()
@@ -44,6 +45,7 @@ public class PMNotification_Engine_Logic : BaseNetLogic
     }
     #region PowerMonitorEvents    
 
+    [ExportMethod]
     private async void getEventsFromPM()
     {
         // Skip this cycle if FTP download is already in progress
@@ -53,17 +55,17 @@ public class PMNotification_Engine_Logic : BaseNetLogic
             return;
         }
 
-        foreach(var device in devicesFolder.GetNodesByType<PMNotification_PowerMonitor>().ToList())
+        foreach (var device in devicesFolder.GetNodesByType<PMNotification_PowerMonitor>().ToList())
         {
 
             bool connectionReestablished = false;
 
-            if(device.DeviceStatus.connectionStatus as int? == 0)
+            if (device.DeviceStatus.connectionStatus as int? == 0)
             {
                 connectionReestablished = true;
             }
 
-            if(!device.httpEnable)
+            if (!device.httpEnable)
             {
                 device.DeviceStatus.connectionStatus = 0;
                 continue;
@@ -82,12 +84,12 @@ public class PMNotification_Engine_Logic : BaseNetLogic
             try
             {
 
-                using(HttpClient httpClient = new HttpClient())
+                using (HttpClient httpClient = new HttpClient())
 
                 {
                     httpClient.Timeout = TimeSpan.FromMilliseconds(connectionTimeout);
                     HttpResponseMessage response = await httpClient.GetAsync(filePath);
-                    if(response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode)
                     {
                         csvData = await response.Content.ReadAsStringAsync();
                     }
@@ -101,7 +103,7 @@ public class PMNotification_Engine_Logic : BaseNetLogic
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 device.DeviceStatus.lastError = "Device server error: " + ex.Message;
                 device.DeviceStatus.connectionStatus = 2;
@@ -124,12 +126,12 @@ public class PMNotification_Engine_Logic : BaseNetLogic
 
             List<PowerMonitorEvent> eventsToAdd = new List<PowerMonitorEvent>();
 
-            if(eventRecords.Count == 0) continue;
+            if (eventRecords.Count == 0) continue;
 
-            foreach(var eventRecord in eventRecords.AsEnumerable().Reverse())
+            foreach (var eventRecord in eventRecords.AsEnumerable().Reverse())
             {
                 string[] eventRecordSplited = eventRecord.Split(',');
-                if(eventRecord.Length == 0 || !int.TryParse(eventRecordSplited[0], out int number)) continue;
+                if (eventRecord.Length == 0 || !int.TryParse(eventRecordSplited[0], out int number)) continue;
 
                 try
                 {
@@ -180,7 +182,7 @@ public class PMNotification_Engine_Logic : BaseNetLogic
                         return $"{raw.Substring(0, 8)}_{raw.Substring(8, 6)}_{raw.Substring(14, 6)}";
                     }
 
-                    if(lastSavedEvent != null && lastSavedEvent.UTC_Timestamp == powerMonitorEvent.UTC_Timestamp
+                    if (lastSavedEvent != null && lastSavedEvent.UTC_Timestamp == powerMonitorEvent.UTC_Timestamp
                         && lastSavedEvent.Event_Type == powerMonitorEvent.Event_Type
                         && lastSavedEvent.Sub_Event_Code == powerMonitorEvent.Sub_Event_Code)
                     {
@@ -192,16 +194,16 @@ public class PMNotification_Engine_Logic : BaseNetLogic
                     }
 
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Log.Info("PMNotification", "Device: " + device.nameToDisplay + ". Couldn't parse the table: " + ex.Message);
                     device.DeviceStatus.lastError = "Couldn't parse the table: " + ex.Message;
                 }
             }
 
-            if(eventsToAdd != null)
+            if (eventsToAdd != null)
             {
-                foreach(var eventToAdd in eventsToAdd.AsEnumerable().Reverse())
+                foreach (var eventToAdd in eventsToAdd.AsEnumerable().Reverse())
                 {
                     AddPowerMonitorEvent(device, eventToAdd, connectionReestablished);
                 }
@@ -209,8 +211,8 @@ public class PMNotification_Engine_Logic : BaseNetLogic
 
         }
 
-        if(emailServiceTest.Value != 1) checkEmialService();
-        if(emailServiceTest.Value == 1) sendNotifications();
+        if (emailServiceTest.Value != 1) checkEmialService();
+        if (emailServiceTest.Value == 1) sendNotifications();
 
     }
 
@@ -251,20 +253,21 @@ public class PMNotification_Engine_Logic : BaseNetLogic
     #endregion
     #region sendMail
 
+    [ExportMethod]
     private void sendNotifications()
     {
-        foreach(var device in devicesFolder.GetNodesByType<PMNotification_PowerMonitor>().ToList())
+        foreach (var device in devicesFolder.GetNodesByType<PMNotification_PowerMonitor>().ToList())
         {
 
             //No events, no point to going through
-            if(!device.PowerQualityEvents.Children.Any()) continue;
+            if (!device.PowerQualityEvents.Children.Any()) continue;
 
             List<PMNotification_User> notificationRecipients = new List<PMNotification_User>();
             List<PMNotification_eventObject> eventsToSend = new List<PMNotification_eventObject>();
 
             List<PMNotification_eventObject> deviceEvents = device.PowerQualityEvents.GetNodesByType<PMNotification_eventObject>().ToList();
 
-            for(int i = 0; i < deviceEvents.Count; i++)
+            for (int i = 0; i < deviceEvents.Count; i++)
             {
 
                 eventsToSend.Clear();
@@ -273,17 +276,17 @@ public class PMNotification_Engine_Logic : BaseNetLogic
 
                 PMNotification_eventObject eventObject = deviceEvents[i];
 
-                if(eventObject.NotificationProcessed == true) continue;
+                if (eventObject.NotificationProcessed == true) continue;
 
                 eventsToSend.Add(eventObject);
 
-                if(!device.emailEnable)
+                if (!device.emailEnable)
                 {
                     markNotificationProcessed(eventsToSend);
                     continue;
                 }
 
-                while((i < deviceEvents.Count - 1)
+                while ((i < deviceEvents.Count - 1)
                     && eventObject.Event_Type == deviceEvents[i + 1].Event_Type
                     && eventObject.UTC_Timestamp == deviceEvents[i + 1].UTC_Timestamp)
                 {
@@ -293,9 +296,9 @@ public class PMNotification_Engine_Logic : BaseNetLogic
 
                 // Find the users to which the notification needs to be sent
 
-                foreach(PMNotification_User user in usersFolder.Children)
+                foreach (PMNotification_User user in usersFolder.Children)
                 {
-                    if(user.isActive
+                    if (user.isActive
                         && user.eventsDefinitions.Get<PMNotification_Definition>(eventObject.Event_Type) != null
                         && user.eventsDefinitions.Get<PMNotification_Definition>(eventObject.Event_Type).Selected == true
                         && user.deviceDefinitions.Get<PMNotification_Definition>(device.nameToDisplay) != null
@@ -303,11 +306,11 @@ public class PMNotification_Engine_Logic : BaseNetLogic
                         notificationRecipients.Add(user);
                 }
 
-                if(notificationRecipients.Any())
+                if (notificationRecipients.Any())
                 {
                     var status = sendEmail(notificationRecipients, eventsToSend, device);
 
-                    if(!status)
+                    if (!status)
                     {
                         emailServiceTest.Value = 2;
                         return;
@@ -474,7 +477,7 @@ public class PMNotification_Engine_Logic : BaseNetLogic
             }
         }
         else {
-            attachmentURI.Value = null;
+            attachmentURI.Value = "";
         }
 
         try

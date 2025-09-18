@@ -76,6 +76,10 @@ Children:
     Type: BaseDataVariableType
     DataType: NodeId
     Value: "/Objects/PM5000_EmailNotificationsPlusWaveforms/Model/PMNotification/generalSettings"
+  - Class: Method
+    Name: sendNotifications
+  - Class: Method
+    Name: getEventsFromPM
 - Name: PMNotification_Email_Logic
   Id: g=554677fba93b79f6e9ec2909f1d696a0
   Type: NetLogic
